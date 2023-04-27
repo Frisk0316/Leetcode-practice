@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int flipLights(int n, int presses) {
+        int result = 0;
+
+        if(n == 1 && presses == 0) result = 1;
+        else if(n == 1 && presses >= 1) result = 2;
+
+        else if(n == 2 && presses == 0) result = 1;
+        else if(n == 2 && presses == 1) result = 3;
+        else if(n == 2 && presses >  1) result = 4;
+        
+        else if(n >= 3 && presses == 0) result = 1;
+        else if(n >= 3 && presses == 1) result = 4;
+        else if(n >= 3 && presses == 2) result = 7;
+        else                            result = 8;
+
+        /*
+        we get 8 states.
+        So for a sufficiently high m (turns out its >= 3), we get:
+        if(n >= 3)
+            presses = 0, result = 1
+            presses = 1, result = 4
+            presses>= 2, result = 8
+
+        */
+        return result;
+    }
+};

@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int bulbSwitch(int n) {
+        // i = a*a (perfect square) -> 1
+        // else -> 0
+    
+        int result = 0;
+
+        for(int i = 1; i <= n; i++) {
+            double root = sqrt(i);
+            long roots = root +0.5;
+            if(roots * roots == i) result++;
+        }
+
+        return result;
+    }
+};

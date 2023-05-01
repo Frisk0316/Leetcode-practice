@@ -1,0 +1,20 @@
+// wrote at 2023.05.01 
+// wrote by C++
+// Run time: Beats 100%
+// Memory: Beats 95.77%
+
+class Solution {
+public:
+    int kthFactor(int n, int k) {
+        for(int i = 1; i <= n; i++) {
+            if(n % i == 0) {k--;}
+            if(k == 0) { 
+              return i; // i is the kth factor
+              break;
+            }
+        }
+
+        // if n's factor is less than k, return -1
+        return -1;
+    }
+};

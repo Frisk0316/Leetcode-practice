@@ -1,0 +1,25 @@
+// 2023.05.01 daily challenge
+// wrote by C++
+// Run time: Beats 100%
+// Memory: Beats 84.6%
+
+class Solution {
+public:
+    double average(vector<int>& salary) {
+        double max = 0;
+        double min = 1000000;
+        double total = 0;
+
+        for(int i = 0; i < salary.size(); i++) {
+            if(salary[i] > max) max = salary[i];
+            if(salary[i] < min) min = salary[i];
+
+            total += salary[i];
+        }
+
+        total -= max;
+        total -= min;
+
+        return total / (salary.size() - 2);
+    }
+};

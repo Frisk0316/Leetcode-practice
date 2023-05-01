@@ -1,0 +1,44 @@
+// wrote at 2023.05.01 
+// wrote by C++
+// Run time: Beats 28.84% WTF
+// Memory: Beats 99.24%
+
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) {
+        int result = 0, count = 0;
+        int sub_a = 0, sub_b = 0;
+        int zero = 0;
+        
+        for(int i = 0; i < nums.size(); i++) {
+            if(nums[i] == 1 && zero == 0) {
+                sub_a++;
+            }
+            else if(nums[i] == 1 && zero == 1) {
+                sub_b++;
+            }
+            else if(nums[i] == 1 && zero >= 2) {
+                zero = 0;
+                sub_a++;
+            }
+            else if(nums[i] == 0 && zero == 0) {
+                zero++;
+            }
+            else if(nums[i] == 0 && zero == 1) {
+                if(sub_a + sub_b > result) result = sub_a + sub_b;
+                sub_a = sub_b;
+                sub_b = 0;
+            }
+            else if(nums[i] == 0 && zero >= 2) {
+                sub_a = 0;
+                sub_b = 0;
+            }
+        }
+       
+        if(sub_a + sub_b > result) result = sub_a + sub_b;
+        
+        // if the binary is all 1s, result--
+        if(sub_b == 0 && zero == 0) result--; 
+        return result;
+    }
+};

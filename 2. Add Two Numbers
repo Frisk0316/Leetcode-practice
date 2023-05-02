@@ -8,6 +8,11 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+ 
+ // wrote at 2023.05.03 used C++
+ // Time: beats 67.64%
+ // Memory: beats 53.77%
+ 
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {

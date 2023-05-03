@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
+        
+        // sort nums1 and nums2
+        sort(nums1.begin(), nums1.end());
+        sort(nums2.begin(), nums2.end());
+        
+        //erase duplicate elements of nums1 and nums2
+        nums1.erase(unique(nums1.begin(), nums1.end()), nums1.end());
+        nums2.erase(unique(nums2.begin(), nums2.end()), nums2.end());
+       
+        vector result(2, vector<int>{});
+        
+        //find the difference of nums1 and nums2
+        set_difference(nums1.begin(), nums1.end(), nums2.begin(), nums2.end(), back_inserter(result[0]));
+        set_difference(nums2.begin(), nums2.end(), nums1.begin(), nums1.end(), back_inserter(result[1]));
+        
+        return result;   
+    }
+};

@@ -1,0 +1,36 @@
+// 2023.05.05 Leetcode daily challenge
+// wrote by C++
+// Runtime: beat 87.54%
+// Memory: Beats 68.38%
+
+class Solution {
+public:
+    int maxVowels(string s, int k) {
+        int result = 0;
+        int temp = 0;
+        for(int i = 0; i < k; i++) {
+            if(s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
+                temp++;
+        }
+
+        result = temp;
+        
+        // since we already have s[0] to s[k-1] total numbers of vowel
+        // we shouldn't compute again or we will get TLE
+        // therefore, we should use sliding window method
+        // in this case, we can add s[k] and minus s[0] 
+        // to compute s[1] to s[k] total number of vowel
+        
+        for(int i = k; i < s.size(); i++) {
+            if(s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
+                temp++;
+            if(s[i-k] == 'a' || s[i-k] == 'e' || s[i-k] == 'i' || s[i-k] == 'o' || s[i-k] == 'u')
+                temp--;
+
+            result = max(result, temp);
+        }
+
+        
+        return result;
+    }
+};

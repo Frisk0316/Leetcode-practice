@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int numSubseq(vector<int>& nums, int target) {
+        // 63 = 2^6 - 1 = 6C1 + 6C2 + 6C3 + 6C4 + 6C5 + 6C6
+        // 6C0 + 6C1 + ... + 6C6 = 64 = 2^6
+
+        int result = 0;
+        sort(nums.begin(), nums.end());
+        
+        int i = 0;
+        int j = nums.size() - 1;
+        int mod = 1e9+7;
+
+        // 2^30 > 1e9+7 
+        // we can define pows which is smaller than mod
+        vector<int> pows(nums.size(), 1);
+        for (int k = 1 ; k < nums.size() ; k++)
+            pows[k] = pows[k - 1] * 2 % mod;
+
+        while(i <= j) {
+            if(nums[i] + nums[j] <= target) {
+                result = (result + pows[j - i++]) % mod;
+            }
+            else {
+                j--;
+            }
+        }
+        return result;
+        
+    }
+};

@@ -1,0 +1,47 @@
+// Leetcode challenge 2023/05/07
+// finished at 2023/05/07, wrote by C++
+// Runtime beats 70.14%
+// Memory beats 79.86%
+
+class Solution {
+public:
+    vector<int> longestObstacleCourseAtEachPosition(vector<int>& obstacles) {
+        
+        // if o[i] <= o[i+1]
+        // the maximum length non-decrease subarray++;
+        // if o[i] >  o[i+1]
+        // find the k that o[k] <= o[i+1]
+        
+        vector<int> nums;
+        vector<int> result;
+        
+        //copied the array of obstacles (nope, we don't copy that line by line)
+        // for(int i = 0; i < obstacles.size(); i++) {
+        //   result.push_back(obstacles[i]);
+        // }
+        
+        //slower way (not so sure)
+        // vector<int> result(obstacles);
+
+        // that's it, much simpler :)
+        result = obstacles;
+       
+        for(int i = 0; i < obstacles.size(); i++) {
+          int x = result[i];
+          
+          // no elements, or the last element is smaller than x
+          // push_back x, subarray length = nums.size()
+          if(nums.empty() || nums[nums.size() - 1] <= x) {
+            nums.push_back(x);
+            result[i] = nums.size();
+          }
+          else {
+            // find the index of smallest number which larger than x
+            int index = upper_bound(nums.begin(), nums.end(), x) - nums.begin();
+            nums[index] = x;
+            result[i] = index + 1;
+          }
+        }
+        return result;
+    }
+};

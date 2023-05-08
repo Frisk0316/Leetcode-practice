@@ -1,0 +1,44 @@
+// finished at 2023/05/08
+// wrote by C++
+// Runtime beats 13.19%
+// Memory beats 75.99%
+// time complexity: O(N^2)
+
+class Solution {
+public:
+    bool checkXMatrix(vector<vector<int>>& grid) {
+        bool result = true;
+        int n = grid.size();
+
+        // check diagonals
+        for(int i = 0; i <= n/2; i++) {
+            if(grid[i][i] == 0 || grid[i][n-i-1] == 0 || grid[n-i-1][i] == 0 || grid[n-i-1][n-i-1] == 0) {
+                result = false;
+                break;
+            }
+            // since grid[i][j] >= 0
+            // we can set checked diagonals to -1 for checking non-diagonals
+            else{
+                grid[i][i] = -1;
+                grid[i][n-i-1] = -1;
+                grid[n-i-1][i] = -1;
+                grid[n-i-1][n-i-1] = -1;
+            }
+        }
+
+        // check non-diagonals (lazy approach)
+        if(result) {
+            for(int i = 0; i < n; i++) {
+                for(int j = 0; j < n; j++) {
+                    if(grid[i][j] != 0 && grid[i][j] != -1) {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+        }
+        
+
+        return result;
+    }
+};

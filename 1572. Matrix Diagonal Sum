@@ -1,0 +1,23 @@
+// 2023/05/08 Leetcode Daily Challenge
+// wrote by C++
+// Runtime beats 27.79%
+// Memory beats 92.7%
+
+class Solution {
+public:
+    int diagonalSum(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int total = 0;
+        
+        for(int i = 0; i < n/2; i++) {
+            total = total + mat[i][i] + mat[i][n-i-1] + mat[n-i-1][i] + mat[n-i-1][n-i-1];
+        }
+
+        // add the middle of the matrix if row and column are odd
+        if(n % 2 != 0) {
+            total += mat[n/2][n/2];
+        }
+        
+        return total;
+    }
+};

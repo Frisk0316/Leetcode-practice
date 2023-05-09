@@ -1,0 +1,14 @@
+// finished at 2023/05/09
+// wrote by C++
+// Runtime beats 26.46%
+// Memory beats 78.76%
+
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int location = 0;
+        for (int reach = 0; location < nums.size() && location <= reach; location++)
+            reach = max(location + nums[location], reach);
+        return location == nums.size();        
+    }
+};

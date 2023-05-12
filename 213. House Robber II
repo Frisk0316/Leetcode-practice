@@ -1,0 +1,27 @@
+// solved at 2023/05/13
+// wrote by C++
+// Runtime beats 100%
+// Memory beats 86.75%
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        
+        //edge case
+        if(nums.size() == 1) return nums[0];
+        
+        // since nums[0] and nums[n-1] are adjacant, we can break it to two cases
+        // 0 ~ n-2 and 1 ~ n-1
+        int sum_a[1001] = {};
+        for(int i = nums.size() - 2; i >= 0 ; i--) {
+            sum_a[i] = max(nums[i] + sum_a[i+2], sum_a[i+1]);
+        }
+
+        int sum_b[1001] = {};
+        for(int i = nums.size() - 1; i >= 1 ; i--) {
+            sum_b[i] = max(nums[i] + sum_b[i+2], sum_b[i+1]);
+        }
+
+        return max(sum_b[1], sum_a[0]);
+    }
+};

@@ -1,0 +1,24 @@
+// Leetcode 2023/05/18 Daily Challenge
+// wrote by C++
+// Runtime beats 43.31%
+// Memory beats  48.82%
+
+class Solution {
+public:
+    vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
+        vector<int> result;
+        vector<int> in(n);
+
+        for(auto edge: edges) {
+            in[edge[1]]++;
+        }
+
+        // if the vertical is not included in endpoint
+        // it should be printed
+        for(int i = 0; i != n; i++) {
+            if(in[i] == 0) result.push_back(i);
+        }
+
+        return result;
+    }
+};
